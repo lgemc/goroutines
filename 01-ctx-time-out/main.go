@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	patternserver "goroutines-patterns/shared/patterns-server"
+	mathserver "goroutines-patterns/shared/math-server"
 )
 
 const (
@@ -35,14 +35,14 @@ func main() {
 		go func(number int) {
 			defer wg.Done()
 
-			operation := patternserver.OperationPayload{
-				Operation: patternserver.Power,
+			operation := mathserver.OperationPayload{
+				Operation: mathserver.Power,
 				A:         number,
 				B:         3,
 				Delay:     number * 300,
 			}
 
-			response, err := patternserver.PerformOperation(ctx, operation)
+			response, err := mathserver.PerformOperation(ctx, operation)
 			if err != nil {
 				fmt.Printf("error: %v\n", err)
 

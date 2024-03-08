@@ -6,13 +6,16 @@ import (
 	"sync"
 	"time"
 
-	patternserver "goroutines-patterns/shared/patterns-server"
+	mathserver "goroutines-patterns/shared/math-server"
 )
 
 const (
+	// con 100 numeros, 1 worker (sin gorutinas) y delay de 500, se demoraria 50 segundos
+	// con 100 numeros, 5 workers (con gorutinas) y delay de 500, se demoraria 10 segundos
+	// con 100 numeros, 10 workers (con gorutinas) y delay de 500, se demoraria 5 segundos
 	numberLength = 100
 	delay        = 500
-	maxWorkers   = 5
+	maxWorkers   = 20
 )
 
 func genNumbers() <-chan int {
@@ -35,14 +38,14 @@ func workerPow2(workerId int, in <-chan int, out chan<- int, wg *sync.WaitGroup)
 	for number := range in {
 		fmt.Printf("processing number %d at worker %d\n", number, workerId)
 
-		operation := patternserver.OperationPayload{
-			Operation: patternserver.Power,
+		operation := mathserver.OperationPayload{
+			Operation: mathserver.Power,
 			A:         number,
 			B:         2,
 			Delay:     delay,
 		}
 
-		response, err := patternserver.PerformOperation(context.Background(), operation)
+		response, err := mathserver.PerformOperation(context.Background(), operation)
 		if err != nil {
 			fmt.Printf("error: %v\n", err)
 		}

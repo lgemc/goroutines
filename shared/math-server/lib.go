@@ -1,4 +1,4 @@
-package patternserver
+package mathserver
 
 import (
 	"bytes"

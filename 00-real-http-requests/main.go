@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"time"
 
-	patternserver "goroutines-patterns/shared/patterns-server"
+	mathserver "goroutines-patterns/shared/math-server"
 )
 
 const (
 	numberLength   = 20
-	simulatedDelay = 300
+	simulatedDelay = 500
 )
 
 func genNumbers() []int {
@@ -31,8 +31,8 @@ func main() {
 	result := make([]int, numberLength)
 	// (x^2)
 	for i := 0; i < numberLength; i++ {
-		response, err := patternserver.PerformOperation(context.Background(), patternserver.OperationPayload{
-			Operation: patternserver.Power,
+		response, err := mathserver.PerformOperation(context.Background(), mathserver.OperationPayload{
+			Operation: mathserver.Power,
 			A:         numbers[i],
 			B:         2,
 			Delay:     simulatedDelay,
